@@ -14,17 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zonabets.betmanagement.model.User;
+import com.zonabets.betmanagement.service.UserService;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
+    UserService userService;
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
-        return new ResponseEntity<User>(HttpStatus.OK);
+        return new ResponseEntity<User>(userService.getUser(id), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
@@ -38,8 +41,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        return new ResponseEntity<User>(HttpStatus.CREATED);
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+        return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

@@ -25,9 +25,6 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
     @NotBlank(message = "username cannot be blank")
     @NonNull
     @Column(nullable = false, unique = true)

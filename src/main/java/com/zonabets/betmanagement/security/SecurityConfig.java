@@ -27,6 +27,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(new AntPathRequestMatcher("/h2/**")).permitAll()
                 .requestMatchers(HttpMethod.POST, SecurityConstants.REGISTER_PATH).permitAll()
+                .requestMatchers(HttpMethod.GET, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
