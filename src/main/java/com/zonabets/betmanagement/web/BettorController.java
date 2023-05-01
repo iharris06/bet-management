@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zonabets.betmanagement.model.Bet;
+import com.zonabets.betmanagement.model.Bettor;
 
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/bet")
-public class BetController {
+@RequestMapping("/bettor")
+public class BettorController {
 
     @GetMapping("/{id}")
-    public ResponseEntity<Bet> getBet(@PathVariable Long id) {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Bettor> getBettor(@PathVariable Long id) {
+        return new ResponseEntity<Bettor>(HttpStatus.OK);
     }
-}   
+}

@@ -1,16 +1,20 @@
 package com.zonabets.betmanagement.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 @AllArgsConstructor
@@ -18,8 +22,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "bettors")
+public class Bettor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -28,14 +32,11 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotBlank(message = "username cannot be blank")
-    @NonNull
-    @Column(nullable = false, unique = true)
-    private String username;
+    @Column(name = "bank", columnDefinition = "float default", nullable = false)
+    private float bank;
 
-    @NotBlank(message = "password cannot be blank")
-    @NonNull
-    @Column(nullable = false)
-    private String password;
+    @JsonIgnore
+    @OneToMany(mappedBy = "bettor", cascade = CascadeType.ALL)
+    private List<Bet> bets;
 
 }
