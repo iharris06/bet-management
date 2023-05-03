@@ -20,7 +20,8 @@ import com.zonabets.betmanagement.exception.EntityNotFoundException;
 import com.zonabets.betmanagement.exception.ErrorResponse;
 
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
-    @ExceptionHandler({ EntityNotFoundException.class })
+
+    @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex) {
         ErrorResponse error = new ErrorResponse(Arrays.asList(ex.getMessage()));
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);

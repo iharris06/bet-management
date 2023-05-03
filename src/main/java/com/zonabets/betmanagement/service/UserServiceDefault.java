@@ -1,5 +1,6 @@
 package com.zonabets.betmanagement.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,14 +21,19 @@ public class UserServiceDefault implements UserService {
 
     @Override
     public void deleteUser(Long id) {
-        // TODO Auto-generated method stub
-
+        userRepository.deleteById(id);
     }
 
     @Override
     public User getUser(Long id) {
         Optional<User> user = userRepository.findById(id);
         return unwrapUser(user, id);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        List<User> users = (List<User>) userRepository.findAll();
+        return users;
     }
 
     @Override

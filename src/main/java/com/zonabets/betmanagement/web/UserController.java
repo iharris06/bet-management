@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
-    UserService userService;
+    private UserService userService;
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
@@ -37,7 +37,7 @@ public class UserController {
 
     @GetMapping("/all")
     public ResponseEntity<List<User>> getUsers() {
-        return new ResponseEntity<List<User>>(HttpStatus.OK);
+        return new ResponseEntity<List<User>>(userService.getUsers(), HttpStatus.OK);
     }
 
     @PostMapping("/register")
@@ -47,6 +47,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
     }
 

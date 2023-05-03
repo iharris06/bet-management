@@ -33,8 +33,8 @@ public class Contest {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "result", nullable = true)
-    private String result;
+    @Column(name = "result", nullable = false)
+    private String result = "TBD";
 
     @JsonIgnore
     @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL)

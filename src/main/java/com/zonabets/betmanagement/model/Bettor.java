@@ -2,6 +2,8 @@ package com.zonabets.betmanagement.model;
 
 import java.util.List;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -32,8 +34,8 @@ public class Bettor {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "bank", columnDefinition = "float default", nullable = false)
-    private float bank;
+    @Column(name = "bank", columnDefinition = "double default 10.00", nullable = false)
+    private double bank = 25.00;
 
     @JsonIgnore
     @OneToMany(mappedBy = "bettor", cascade = CascadeType.ALL)
