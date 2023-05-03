@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,7 @@ public class BetController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Bet>> getBets(@PathVariable Long id) {
+    public ResponseEntity<List<Bet>> getBets() {
         return new ResponseEntity<>(betService.getBets(), HttpStatus.OK);
     }
 
@@ -55,5 +56,13 @@ public class BetController {
     public ResponseEntity<Bet> updateBet(@RequestBody Bet bet, @PathVariable Long bettorId,
             @PathVariable Long contestId) {
         return new ResponseEntity<>(betService.updateBet(bettorId, contestId, bet.getAmount()), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/bettor/{bettorId}/contest/{contestId}")
+    public ResponseEntity<Void> deleteBet(@PathVariable Long bettorId,
+            @PathVariable Long contestId) {
+        betService.deleteBet(bettorId, contestId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
     }
 }
